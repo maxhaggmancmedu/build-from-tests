@@ -5,40 +5,26 @@ import PokemonVote from './components/PokemonVote';
 import { useState } from 'react';
 import Footer from './components/Footer';
 import CalculateWinner from './components/CalculateWinner';
+import { PokemonsContextProvider, usePokemons } from './context/Pokemons';
 
 
 function App() {
-  
-  let submittedName = ''
-  const onSubmit = (name) => {
-    // e.preventDefault()
-    submittedName = name
+  const [userName, setUserName] = useState('')
+  const onSubmit = (name, e) => {
+    e.preventDefault()
+    setUserName(name)
   }
-
-  const [pokemons, setPokemons] = useState([
-    {
-        name: 'bulbasaur',
-        voteCount: 0
-    },
-    {
-        name: 'charmander',
-        voteCount: 0
-    },
-    {
-        name: 'squirtle',
-        voteCount: 0
-    },
-])
-  
-  
 
   return (
     <div className="App">
-      <Header />
-      <CalculateWinner pokemons={pokemons} />
-      <UserInput onSubmit={onSubmit}/>
-      <PokemonVote pokemons={pokemons} setPokemons={setPokemons} />
-      <Footer />
+      <PokemonsContextProvider>
+        <Header />
+        <CalculateWinner />
+        <UserInput onSubmit={onSubmit}/>
+        {userName !== '' && <div>Welcome {userName}</div>}
+        <PokemonVote />
+        <Footer />
+      </PokemonsContextProvider>
     </div>
   );
 }

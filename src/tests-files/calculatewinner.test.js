@@ -15,7 +15,7 @@ describe("The pokemon in the lead or tied should be displayed", () => {
     const results = screen.getByText('Start voting!')
     expect(results).toBeInTheDocument()
   })
-
+// these vote props I did not like, I would have liked to implement it differently by just passing the all pokemons to the component
   test ('displays the winning Pokemon when there is a single winner', () => {
     render(<CalculateWinner bulbasaurVote={3} charmanderVote={2} squirtleVote={1} />)
 
