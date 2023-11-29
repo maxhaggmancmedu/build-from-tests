@@ -13,18 +13,14 @@ function App() {
     submittedName = name
   }
 
-  const onNameChange = (name) => {
-    e.preventDefault()
-    if (name === '') return
-    
-  }
+  
   
 
   return (
     <div className="App">
       <Header />
       <UserInput onSubmit={onSubmit}/>
-      <PokemonInput onNameChange={onNameChange}  />
+      
       <Footer />
     </div>
   );
