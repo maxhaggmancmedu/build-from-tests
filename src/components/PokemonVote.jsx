@@ -1,22 +1,9 @@
 import React, { useState } from 'react'
 import PokemonInput from './PokemonInput'
 
-export default function PokemonVote() {
+export default function PokemonVote({ pokemons, setPokemons }) {
 
-    const [pokemons, setPokemons] = useState([
-        {
-            name: 'bulbasaur',
-            voteCount: 0
-        },
-        {
-            name: 'charmander',
-            voteCount: 0
-        },
-        {
-            name: 'squirtle',
-            voteCount: 0
-        },
-    ])
+    
 
     const handleAddVote = (pokemonToChange) => {
         setPokemons(pokemons.map(pokemon => {
@@ -25,7 +12,7 @@ export default function PokemonVote() {
     }
 
     const onNameChange = (name) => {
-        e.preventDefault()
+        // e.preventDefault()
         if (name === '') return
         
       }
@@ -33,7 +20,7 @@ export default function PokemonVote() {
   return (
     <>
         <h2>Display winner here</h2>
-        {pokemons.map(pokemon => (
+        {pokemons?.map(pokemon => (
             <div key={pokemon.name}>
                 <h3>{pokemon.name}</h3>
                 <button onClick={() => handleAddVote(pokemon)} name='vote'>Vote {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</button>
