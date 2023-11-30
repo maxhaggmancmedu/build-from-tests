@@ -28,9 +28,10 @@ describe("PokemonVote component", () => {
     const voteBulbasaurButton = screen.getByText('Vote Bulbasaur');
     fireEvent.click(voteBulbasaurButton);
 
-    const updatedVoteCount = screen.getByTestId('bulbasaur-vote').textContent;
-
-    expect(parseInt(updatedVoteCount)).toBe(parseInt(initialVoteCount) + 1);
+    waitFor(() => {
+      const updatedVoteCount = screen.getByTestId('bulbasaur-vote').textContent;
+      expect(parseInt(updatedVoteCount)).toBe(parseInt(initialVoteCount) + 1);
+    })
   });
 
   test('increments Bulbasaur votes when the Vote Charmander button is clicked', () => {
@@ -41,9 +42,10 @@ describe("PokemonVote component", () => {
     const voteBulbasaurButton = screen.getByText('Vote Charmander');
     fireEvent.click(voteBulbasaurButton);
 
-    const updatedVoteCount = screen.getByTestId('charmander-vote').textContent;
-
-    expect(parseInt(updatedVoteCount)).toBe(parseInt(initialVoteCount) + 1);
+    waitFor(() => {
+      const updatedVoteCount = screen.getByTestId('charmander-vote').textContent;
+      expect(parseInt(updatedVoteCount)).toBe(parseInt(initialVoteCount) + 1);
+    });
   });
 
   test('increments Bulbasaur votes when the Vote Squirtle button is clicked', () => {
@@ -54,9 +56,11 @@ describe("PokemonVote component", () => {
     const voteBulbasaurButton = screen.getByText('Vote Squirtle');
     fireEvent.click(voteBulbasaurButton);
 
-    const updatedVoteCount = screen.getByTestId('squirtle-vote').textContent;
+    waitFor(() => {
+      const updatedVoteCount = screen.getByTestId('squirtle-vote').textContent;
+      expect(parseInt(updatedVoteCount)).toBe(parseInt(initialVoteCount) + 1);
 
-    expect(parseInt(updatedVoteCount)).toBe(parseInt(initialVoteCount) + 1);
+    })
   });
 })
 

@@ -32,7 +32,7 @@ export default function PokemonVote() {
             </button>
             <p data-testid="paragraph" name="votes">
               <span data-testid={`${pokemon.name}-vote`}>
-                {pokemon.voteCount}
+              Votes: {pokemon.voteCount} 
               </span>
             </p>
             <PokemonInput pokemon={pokemon} />

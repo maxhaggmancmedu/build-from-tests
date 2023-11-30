@@ -4,9 +4,7 @@ import UserInput from './components/UserInput';
 import PokemonVote from './components/PokemonVote';
 import { useState } from 'react';
 import Footer from './components/Footer';
-import CalculateWinner from './components/CalculateWinner';
-import { PokemonsContextProvider, usePokemons } from './context/Pokemons';
-
+import { PokemonsContextProvider } from './context/Pokemons';
 
 function App() {
   const [userName, setUserName] = useState('')
@@ -19,9 +17,8 @@ function App() {
     <div className="App">
       <PokemonsContextProvider>
         <Header />
-        <CalculateWinner />
         <UserInput onSubmit={onSubmit}/>
-        {userName !== '' && <div>Welcome {userName}</div>}
+        {userName !== '' && <p className='user-name' data-testid='user-input-display'>Welcome {userName}</p>}
         <PokemonVote />
         <Footer />
       </PokemonsContextProvider>

@@ -24,7 +24,6 @@ describe("When the input field is is submitted with new value, the name of the c
 
     fireEvent.change(inputField, { target: { value: "Bulbasaur" } });
     fireEvent.click(changeNameButton);
-
     expect(mockPokemonName).toHaveBeenCalledWith("Bulbasaur");
     expect(inputField.value).toBe("");
   });
@@ -38,7 +37,7 @@ describe("When the input field is is submitted with new value, the name of the c
 
     fireEvent.change(inputField, { target: { value: "" } });
     fireEvent.click(changeNameButton);
-    
+      // we do it here also, instead they could test that the text did not change for that element
     waitFor(() => {
         expect(mockPokemonName).not.toHaveBeenCalled();
     })

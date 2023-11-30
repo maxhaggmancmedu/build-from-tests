@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background-color: black;
+  color: white;
+  margin: 0 10px;
 }
 
 .App-logo {
@@ -26,6 +29,31 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.user-name {
+  margin-top: 20px;
+}
+
+form {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  outline: none;
+  appearance: none;
+  height: 2rem;
+  border: 1px solid black;
+  padding: 0px 4px;
+}
+
+button {
+  height: 2rem;
+  min-width: 102px;
+  width: fit-content;
 }
 
 @keyframes App-logo-spin {
