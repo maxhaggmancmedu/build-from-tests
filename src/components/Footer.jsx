@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function Footer() {
-  return (
-    <h4>Copyright</h4>
-  )
+  return <h4>Copyright Doofenshmirtz Evil Inc.</h4>;
 }

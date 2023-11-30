@@ -1,41 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import { usePokemons } from '../context/Pokemons';
+import React, { useEffect, useState } from "react";
+import { usePokemons } from "../context/Pokemons";
+import { capitalize } from "../utils/capitalize";
 
 export default function CalculateWinner() {
-    const [pokemonInTheLead, setPokemonInTheLead] = useState([]);
-    const { pokemons } = usePokemons()
-    const [startedVoting, setStartedVoting] = useState(false)
-    useEffect(() => {
-        let leadingPokemon = [];
-        let maxVotes = -1;
-        
-        pokemons.forEach((pokemon) => {
-        if (pokemon.voteCount > maxVotes) {
-        leadingPokemon = [pokemon];
-        maxVotes = pokemon.voteCount;
-        } else if (pokemon.voteCount === maxVotes) {
-        leadingPokemon.push(pokemon);
-        }
+  const { pokemons } = usePokemons();
+  const [winner, setWinner] = useState("Start voting!");
 
-        if (pokemonInTheLead.length === 3) {
-            for (let i = 0; i < pokemonInTheLead.length; i++) {
-                if (pokemonInTheLead[i].voteCount !== 0) {
-                    setStartedVoting(true)
-                }
-            }
-        }
+  useEffect(() => {
+    const maxVotes = Math.max(...pokemons.map((pokemon) => pokemon.voteCount));
+    const winnersNames = pokemons
+      .filter((pokemon) => pokemon.voteCount === maxVotes)
+      .map((winner) => winner.name);
 
-    });
-    setPokemonInTheLead(leadingPokemon);
-    }, [pokemons]);
+    if (winnersNames.length === 1) {
+      setWinner(`${capitalize(winnersNames[0])} is in the lead with ${maxVotes} votes!`);
+    } else if (winnersNames.length === 2) {
+      setWinner(
+        `It's a tie between ${capitalize(winnersNames[0])} and ${capitalize(winnersNames[1])} with ${maxVotes} votes!`
+      );
+    } else if (winnersNames.length === 3 && maxVotes !== 0) {
+      setWinner(
+        `It's a tie between ${capitalize(winnersNames[0])} and ${capitalize(winnersNames[1])} and ${capitalize(winnersNames[2])} with ${maxVotes} votes each!`
+      );
+    }
+  }, [pokemons]);
 
-
-  return (
-    <div>
-        {pokemonInTheLead.length === 3 && !startedVoting && <h2>Start voting!</h2>}
-        {pokemonInTheLead.length === 1 && <h2>{pokemonInTheLead[0].name} is in the lead with {pokemonInTheLead[0].voteCount} votes!</h2>}
-        {pokemonInTheLead.length === 2 && <h2>It's a tie between {pokemonInTheLead[0].name} and {pokemonInTheLead[1].name} with {pokemonInTheLead[0].voteCount} votes each!</h2>}
-        {pokemonInTheLead.length === 3 && startedVoting && <h2>It's a tie between {pokemonInTheLead[0].name} and {pokemonInTheLead[1].name} and {pokemonInTheLead[2].name} with {pokemonInTheLead[0].voteCount} votes each!</h2>}
-    </div>
-  )
+  return <h2>{winner}</h2>;
 }
