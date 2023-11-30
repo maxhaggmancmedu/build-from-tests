@@ -19,7 +19,9 @@ export default function PokemonVote() {
 
   return (
     <>
+      <div className="line" />
       <CalculateWinner />
+      <div className="line" />
       {pokemons.map((pokemon) => {
         const buttonText = `Vote ${
           pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
@@ -27,15 +29,16 @@ export default function PokemonVote() {
         return (
           <div key={pokemon.id}>
             <h3>{capitalize(pokemon.name)}</h3>
-            <button onClick={() => handleAddVote(pokemon)} name="vote">
-              {buttonText}
-            </button>
+            <PokemonInput pokemon={pokemon} />
             <p data-testid="paragraph" name="votes">
               <span data-testid={`${pokemon.name}-vote`}>
               Votes: {pokemon.voteCount} 
               </span>
             </p>
-            <PokemonInput pokemon={pokemon} />
+            <button onClick={() => handleAddVote(pokemon)} name="vote">
+              {buttonText}
+            </button>
+            <div className="line" />
           </div>
         );
       })}
